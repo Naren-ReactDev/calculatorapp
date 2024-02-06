@@ -1,11 +1,11 @@
-export const Button =({name ,value,h,w,handleButtonClick})=>{
-    const height=h?h:'50px';
-    const width=w?w:'50px';
+export const Button =({name ,value,styleClass,w,handleButtonClick})=>{
+    
+
     const handleClick=()=>{
         handleButtonClick(name);
     }
     return (<>
-    <button style ={{marginRight:'4px',height:height,width:width}} name={name}
+    <button  name={name} className={styleClass}
     onClick={handleClick}>{value}</button>
     </>);
 }

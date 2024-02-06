@@ -1,15 +1,11 @@
-
-import './App.css';
-import { Calculator } from './components/calculator'; 
+import "./App.css";
+import { Calculator } from "./components/calculator";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-<Calculator></Calculator>
-      </header>
+    <div className="main">
+      <Calculator></Calculator>
     </div>
   );
 }
-
 export default App;
