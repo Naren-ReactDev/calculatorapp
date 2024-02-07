@@ -3,53 +3,30 @@ import { Button } from "./Button";
 
 export const Calculator = () => {
   const [displayValue, setDisplayValue] = useState(0);
-  const [firstNum, setFirstNum] = useState(0);
-  const [secondNum, setSecondtNum] = useState(0);
-  const [operator, setOperator] = useState();
+
 
   const operationsList = {
     ADD: "+",
     SUB: "-",
-    MULTI: "X",
+    MULTI: "*",
     DIVIDE: "/",
   };
 
   const performCalculation = (value) => {
-    console.log("firstNum==>", firstNum);
-    console.log("secondNum==>", secondNum);
-    console.log("operator==>", operator);
-    if (!operator || !firstNum || !secondNum) {
-      return;
-    }
-    let result;
-    switch (operator) {
-      case "ADD":
-        result = Number(firstNum) + Number(secondNum);
-        break;
-      case "SUB":
-        result = Number(firstNum) - Number(secondNum);
-        break;
-      case "MULTI":
-        result = Number(firstNum) * Number(secondNum);
-        break;
-      case "DIVIDE":
-        result = Number(firstNum) / Number(secondNum);
-        break;
-    }
-    setDisplayValue(result);
-    setFirstNum(0);
-    setSecondtNum(0);
-    setOperator();
+     setDisplayValue(eval(displayValue)); 
+
   };
-  const setOperatorValue = (value) => {
-    setOperator(value);
+  const setOperatorValue = (value) => {   
+  // if(['*','+','/','-'].includes(displayValue?.toString.slice(-1))){
+  //   return;
+  //  }
     setDisplayValue(
       displayValue === 0 ? 0 : displayValue + operationsList[value]
     );
   };
 
   const handleButtonClick = (value) => {
-    console.log(value);
+
     switch (value) {
       case "0":
       case "1":
@@ -66,20 +43,10 @@ export const Calculator = () => {
           displayValue === 0 || displayValue === "0"
             ? value
             : displayValue + value
-        );
-        if (!operator) {
-          setFirstNum(displayValue === 0 ? value : displayValue + value);
-        } else {
-          setSecondtNum(
-            secondNum === 0 && value === 0 ? value : secondNum + value
-          );
-        }
+        );     
         break;
       case "RESET":
         setDisplayValue(0);
-        setFirstNum(0);
-        setSecondtNum(0);
-        setOperator();
         break;
       case "DEL":
         setDisplayValue(
@@ -92,7 +59,7 @@ export const Calculator = () => {
       case "SUB":
       case "MULTI":
       case "DIVIDE":
-        firstNum === 0 ? setOperatorValue("") : setOperatorValue(value);
+        setOperatorValue(value);
         break;
       case "CALCULATE":
         performCalculation(value);
@@ -101,7 +68,6 @@ export const Calculator = () => {
         break;
     }
 
-    console.log(displayValue);
   };
 
   return (
@@ -109,14 +75,15 @@ export const Calculator = () => {
    
 			<div className="headersection">
 				<h3>Calc</h3>
-				<div className="numbers">
-					<p id="one">1</p>
-					<p id="two">2</p>
-					<p id="three">3</p>
+        
+				<div className="numbers">		
+					<p id="themeone">1</p>
+					<p id="themetwo">2</p>
+					<p id="themethree">3</p>
 				</div>
 			</div>
 			<div className="control">
-				<p>Theme</p>
+      <p id="theme">THEME</p>
 				<div className="box">
 					<div id="circle"></div>
 				</div>
