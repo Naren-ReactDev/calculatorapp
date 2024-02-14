@@ -12,7 +12,7 @@ export const Calculator = () => {
   };
 
   const performCalculation = (value) => {
-    if (["*", "+", "/", "-"].includes(displayValue.slice(-1))) {
+    if (["*", "+", "/", "-"].includes(displayValue?.toString().slice(-1))) {
       return;
     }
     try {
