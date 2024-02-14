@@ -4,7 +4,6 @@ import { Button } from "./Button";
 export const Calculator = () => {
   const [displayValue, setDisplayValue] = useState(0);
 
-
   const operationsList = {
     ADD: "+",
     SUB: "-",
@@ -13,20 +12,22 @@ export const Calculator = () => {
   };
 
   const performCalculation = (value) => {
-     setDisplayValue(eval(displayValue)); 
-
+    if (["*", "+", "/", "-"].includes(displayValue.slice(-1))) {
+      return;
+    }
+    try {
+      setDisplayValue(eval(displayValue));
+    } catch (error) {
+      setDisplayValue(0);
+    }
   };
-  const setOperatorValue = (value) => {   
-  // if(['*','+','/','-'].includes(displayValue?.toString.slice(-1))){
-  //   return;
-  //  }
+  const setOperatorValue = (value) => {
     setDisplayValue(
       displayValue === 0 ? 0 : displayValue + operationsList[value]
     );
   };
 
   const handleButtonClick = (value) => {
-
     switch (value) {
       case "0":
       case "1":
@@ -43,7 +44,7 @@ export const Calculator = () => {
           displayValue === 0 || displayValue === "0"
             ? value
             : displayValue + value
-        );     
+        );
         break;
       case "RESET":
         setDisplayValue(0);
@@ -67,30 +68,27 @@ export const Calculator = () => {
       default:
         break;
     }
-
   };
 
   return (
     <>
-   
-			<div className="headersection">
-				<h3>Calc</h3>
-        
-				<div className="numbers">		
-					<p id="themeone">1</p>
-					<p id="themetwo">2</p>
-					<p id="themethree">3</p>
-				</div>
-			</div>
-			<div className="control">
-      <p id="theme">THEME</p>
-				<div className="box">
-					<div id="circle"></div>
-				</div>
-			</div>
-	
+      <div className="headersection">
+        <h3>Calc</h3>
 
-      <input className="displayTextBox" value={displayValue}></input>
+        <div className="numbers">
+          <p id="themeone">1</p>
+          <p id="themetwo">2</p>
+          <p id="themethree">3</p>
+        </div>
+      </div>
+      <div className="control">
+        <p id="theme">THEME</p>
+        <div className="box">
+          <div id="circle"></div>
+        </div>
+      </div>
+
+      <input className="displayTextBox" value={displayValue} readOnly></input>
       <div className="buttonGroup">
         <div>
           <Button
